@@ -4,10 +4,10 @@ function getDbString(dbName: string, hostName: string = 'localhost', portNum: nu
     return `mongodb://${hostName}:${portNum}/${dbName}`;
 }
 
-function initDb(): mongoose.Connection {
+async function initDb(): Promise<mongoose.Connection> {
     const connectUri = getDbString('location');
-    mongoose.connect(connectUri);
     console.log(`Connecting to '${connectUri}'`)
+    await mongoose.connect(connectUri);
     return mongoose.connection;
 }
 
